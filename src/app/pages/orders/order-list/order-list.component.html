@@ -1,0 +1,31 @@
+<mat-table [dataSource]="orders" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let order"> {{ order.id }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="customer">
+    <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
+    <mat-cell *matCellDef="let order"> {{ order.customer.name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="total">
+    <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+    <mat-cell *matCellDef="let order"> {{ order.total | currency }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+    <mat-cell *matCellDef="let order">
+      <button mat-raised-button color="primary" routerLink="/orders/{{ order.id }}">
+        Ver
+      </button>
+      <button mat-raised-button color="warn" (click)="deleteOrder(order.id)">
+        Eliminar
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
