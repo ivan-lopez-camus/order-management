@@ -1,1 +1,30 @@
-<p>order-form works!</p>
+<h2 mat-dialog-title>Editar Pedido</h2>
+
+<form (ngSubmit)="saveOrder()">
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Cliente ID</mat-label>
+      <input matInput [(ngModel)]="order.clienteId" name="clienteId" required />
+    </mat-form-field>
+
+    <div *ngFor="let producto of order.productos">
+      <mat-form-field appearance="fill">
+        <mat-label>Producto ID</mat-label>
+        <input matInput [(ngModel)]="producto.productoId" name="productoId" required />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Cantidad</mat-label>
+        <input matInput [(ngModel)]="producto.cantidad" name="cantidad" required />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Precio Unitario</mat-label>
+        <input matInput [(ngModel)]="producto.precioUnitario" name="precioUnitario" required />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button (click)="cancel()">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit">Guardar</button>
+  </div>
+</form>

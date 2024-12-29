@@ -9,13 +9,19 @@ import { AppComponent } from './app.component';
 import { OrderListComponent } from './pages/orders/order-list/order-list.component';
 import { OrderDetailComponent } from './pages/orders/order-detail/order-detail.component';
 import { OrderFormComponent } from './pages/orders/order-form/order-form.component';
+import { DeleteConfirmationDialogComponent } from './shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field'; // If needed for forms
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     OrderListComponent,
     OrderDetailComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    DeleteConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +29,11 @@ import { OrderFormComponent } from './pages/orders/order-form/order-form.compone
     MatTableModule,
     MatButtonModule,
     MatIconModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule
   ],
 
   providers: [],

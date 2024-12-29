@@ -1,31 +1,54 @@
-<mat-table [dataSource]="orders" class="mat-elevation-z8">
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-    <mat-cell *matCellDef="let order"> {{ order.id }} </mat-cell>
-  </ng-container>
+<div class="table-container">
+  <!-- Title for the table -->
+  <h2 class="table-title">Lista de Pedidos</h2>
 
-  <ng-container matColumnDef="customer">
-    <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
-    <mat-cell *matCellDef="let order"> {{ order.customer.name }} </mat-cell>
-  </ng-container>
+  <!-- Mat Table -->
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef class="mat-header-cell"> ID </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.id }} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="total">
-    <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
-    <mat-cell *matCellDef="let order"> {{ order.total | currency }} </mat-cell>
-  </ng-container>
+    <!-- Cliente Column -->
+    <ng-container matColumnDef="cliente">
+      <mat-header-cell *matHeaderCellDef class="mat-header-cell"> Cliente </mat-header-cell>
+      <mat-cell *matCellDef="let order"> Cliente ID: {{ order.clienteId }} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="actions">
-    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-    <mat-cell *matCellDef="let order">
-      <button mat-raised-button color="primary" routerLink="/orders/{{ order.id }}">
-        Ver
-      </button>
-      <button mat-raised-button color="warn" (click)="deleteOrder(order.id)">
-        Eliminar
-      </button>
-    </mat-cell>
-  </ng-container>
+    <!-- Productos Column -->
+    <ng-container matColumnDef="productos">
+      <mat-header-cell *matHeaderCellDef class="mat-header-cell"> Productos </mat-header-cell>
+      <mat-cell *matCellDef="let order">
+        <div *ngFor="let producto of order.productos">
+          Producto ID: {{ producto.productoId }} | Cantidad: {{ producto.cantidad }} | Precio Unitario: {{ producto.precioUnitario | currency }}
+        </div>
+      </mat-cell>
+    </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+    <!-- Total Column -->
+    <ng-container matColumnDef="total">
+      <mat-header-cell *matHeaderCellDef class="mat-header-cell"> Total </mat-header-cell>
+      <mat-cell *matCellDef="let order"> {{ order.total | currency }} </mat-cell>
+    </ng-container>
+
+    <!-- Acciones Column -->
+    <ng-container matColumnDef="acciones">
+      <mat-header-cell *matHeaderCellDef class="mat-header-cell"> Acciones </mat-header-cell>
+      <mat-cell *matCellDef="let order">
+        <!-- Botón de editar -->
+        <button mat-raised-button color="primary" (click)="editOrder(order)">
+          <mat-icon>edit</mat-icon> Editar
+        </button>
+        <!-- Botón de eliminar -->
+        <button mat-raised-button color="warn" (click)="openDeleteDialog(order)">
+          <mat-icon>delete</mat-icon> Eliminar
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Header y Fila -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
