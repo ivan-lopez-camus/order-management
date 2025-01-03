@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Order, DetalleProducto } from 'src/app/shared/models/orderModel';
 import { DeleteConfirmationDialogComponent } from 'src/app/shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { OrderFormComponent } from '../order-form/order-form.component';
+import { OrderDetailComponent } from '../order-detail/order-detail.component';
 
 @Component({
   selector: 'app-order-list',
@@ -217,6 +218,17 @@ export class OrderListComponent implements OnInit {
       if (result === 'save') {
         // Si se guarda el pedido, podrías hacer algo aquí como actualizar la lista de pedidos
       }
+    });
+  }
+
+  openDetailDialog(order: Order): void {
+    const dialogRef = this.dialog.open(OrderDetailComponent, {
+      width: '600px',  // Puedes ajustar el tamaño del modal
+      data: order      // Pasamos el pedido seleccionado al componente de detalle
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('El diálogo se cerró', result);
     });
   }
 }

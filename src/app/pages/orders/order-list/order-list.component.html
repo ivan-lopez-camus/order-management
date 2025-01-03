@@ -36,6 +36,9 @@
     <ng-container matColumnDef="acciones">
       <mat-header-cell *matHeaderCellDef class="mat-header-cell"> Acciones </mat-header-cell>
       <mat-cell *matCellDef="let order">
+        <button mat-raised-button color="accent" (click)="openDetailDialog(order)">
+          <mat-icon>visibility</mat-icon> Ver
+        </button>
         <!-- Botón de editar -->
         <button mat-raised-button color="primary" (click)="editOrder(order)">
           <mat-icon>edit</mat-icon> Editar

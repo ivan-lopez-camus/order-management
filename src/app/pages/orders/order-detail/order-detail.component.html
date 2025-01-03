@@ -1,1 +1,23 @@
-<p>order-detail works!</p>
+<h2 mat-dialog-title>Detalle del Pedido</h2>
+<mat-dialog-content>
+  <div class="order-details">
+    <!-- Información General del Pedido -->
+    <h3>Información General</h3>
+    <p><strong>ID:</strong> {{ order.id }}</p>
+    <p><strong>Cliente ID:</strong> {{ order.clienteId }}</p>
+    <p><strong>Total:</strong> {{ order.total | currency }}</p>
+
+    <!-- Detalles de los Productos -->
+    <h3>Productos</h3>
+    <div *ngFor="let producto of order.productos">
+      <p><strong>Producto ID:</strong> {{ producto.productoId }}</p>
+      <p><strong>Cantidad:</strong> {{ producto.cantidad }}</p>
+      <p><strong>Precio Unitario:</strong> {{ producto.precioUnitario | currency }}</p>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<!-- Acciones del Modal -->
+<mat-dialog-actions>
+  <button mat-button (click)="onClose()">Cerrar</button>
+</mat-dialog-actions>

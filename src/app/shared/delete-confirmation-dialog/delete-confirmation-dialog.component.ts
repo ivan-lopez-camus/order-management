@@ -1,23 +1,17 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { OrderService } from 'src/app/core/services/order.service';
 
 @Component({
   selector: 'app-delete-confirmation-dialog',
-  template: `
-    <h1 mat-dialog-title>Confirmación</h1>
-    <div mat-dialog-content>
-      <p>¿Estás seguro de que deseas eliminar este pedido?</p>
-    </div>
-    <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">No</button>
-      <button mat-button (click)="onConfirm()">Sí</button>
-    </div>
-  `,
+  templateUrl: './delete-confirmation-dialog.component.html',
+  styleUrls: ['./delete-confirmation-dialog.component.scss']
 })
 export class DeleteConfirmationDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<DeleteConfirmationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { orderId: string }
+    @Inject(MAT_DIALOG_DATA) public data: { orderId: string },
+    private orderService: OrderService
   ) {}
 
   onNoClick(): void {
@@ -25,6 +19,15 @@ export class DeleteConfirmationDialogComponent {
   }
 
   onConfirm(): void {
-    this.dialogRef.close('confirm');
+    // Llamamos al servicio para eliminar el pedido
+    this.orderService.deleteOrder(this.data.orderId).subscribe(
+      () => {
+        this.dialogRef.close('confirm');
+      },
+      (error: any) => {
+        console.error('Error al eliminar el pedido', error);
+        this.dialogRef.close('error');
+      }
+    );
   }
 }

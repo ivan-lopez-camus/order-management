@@ -1,0 +1,14 @@
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+mat-dialog-actions {
+  justify-content: flex-end;
+}
+
+h3 {
+  margin-top: 20px;
+  color: #3f51b5;
+}

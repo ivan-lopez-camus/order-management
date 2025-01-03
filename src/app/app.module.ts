@@ -11,9 +11,10 @@ import { OrderDetailComponent } from './pages/orders/order-detail/order-detail.c
 import { OrderFormComponent } from './pages/orders/order-form/order-form.component';
 import { DeleteConfirmationDialogComponent } from './shared/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field'; // If needed for forms
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule, // Necesario para Angular Material
+    BrowserAnimationsModule,
     MatTableModule,
     MatButtonModule,
     MatIconModule,
@@ -33,7 +34,8 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
 
   providers: [],
